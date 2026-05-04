@@ -9,19 +9,19 @@
         max-width: 600px;
         margin: 50px auto;
       }
-      h1 {
-        color: #333;
-      }
-      p {
-        font-size: 20px;
-        color: #555;
-      }
+      h1 { color: #333; }
+      p { font-size: 20px; color: #555; }
+      input { font-size: 18px; margin: 5px; }
+      button { font-size: 18px; margin: 10px 0; }
     </style>
   </head>
   <body>
     <h1>家計簿</h1>
-    <p>収入：<span th:text="${sunyuu}"></span>円</p>
-    <p>支出：<span th:text="${shishutsu}"></span>円</p>
-    <p>貯金：<span th:text="${chokin}"></span>円</p>
+    <form action="/keisan" method="post">
+      <p>収入：<input type="number" name="sunyuu"></p>
+      <p>支出：<input type="number" name="shishutsu"></p>
+      <button type="submit">計算する</button>
+    </form>
+    <p th:if="${chokin}">貯金：<span th:text="${chokin}"></span>円</p>
   </body>
 </html>
