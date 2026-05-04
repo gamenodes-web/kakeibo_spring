@@ -13,6 +13,9 @@
       p { font-size: 20px; color: #555; }
       input { font-size: 18px; margin: 5px; }
       button { font-size: 18px; margin: 10px 0; }
+      table { width: 100%; border-collapse: collapse; }
+      th, td { border: 1px solid #ccc; padding: 10px; text-align: center; }
+      th { background-color: #f0f0f0; }
     </style>
   </head>
   <body>
@@ -20,8 +23,21 @@
     <form action="/keisan" method="post">
       <p>収入：<input type="number" name="sunyuu"></p>
       <p>支出：<input type="number" name="shishutsu"></p>
-      <button type="submit">計算する</button>
+      <button type="submit">保存する</button>
     </form>
-    <p th:if="${chokin}">貯金：<span th:text="${chokin}"></span>円</p>
+
+    <h2>履歴</h2>
+    <table>
+      <tr>
+        <th>収入</th>
+        <th>支出</th>
+        <th>貯金</th>
+      </tr>
+      <tr th:each="data : ${list}">
+        <td th:text="${data.sunyuu}"></td>
+        <td th:text="${data.shishutsu}"></td>
+        <td th:text="${data.chokin}"></td>
+      </tr>
+    </table>
   </body>
 </html>

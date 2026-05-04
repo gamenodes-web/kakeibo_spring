@@ -9,24 +9,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class KakeiboController {
 
+    private final KakeiboRepository repository;
+
+    public KakeiboController(KakeiboRepository repository) {
+        this.repository = repository;
+    }
+
     @GetMapping("/")
     public String index(Model model) {
+        model.addAttribute("list", repository.findAll());
         return "index";
     }
 
-@PostMapping("/keisan")
-public String keisan(
-    @RequestParam int sunyuu,
-    @RequestParam int shishutsu,
-    Model model) {
-    
-    System.out.println("収入：" + sunyuu);
-    System.out.println("支出：" + shishutsu);
-    
-    int chokin = sunyuu - shishutsu;
-    System.out.println("貯金：" + chokin);
-    
-    model.addAttribute("chokin", chokin);
-    return "index";
-}
+    @PostMapping("/keisan")
+    public String keisan(
+        @RequestParam int sunyuu,
+        @RequestParam int shishutsu,
+        Model model) {
+
+        int chokin = sunyuu - shishutsu;
+        KakeiboData data = new KakeiboData(sunyuu, shishutsu, chokin);
+        repository.save(data);
+        model.addAttribute("list", repository.findAll());
+        return "index";
+    }
 }
