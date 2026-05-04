@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8">
+    <title>家計簿アプリ</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 50px auto;
+      }
+      h1 {
+        color: #333;
+      }
+      p {
+        font-size: 20px;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>家計簿</h1>
+    <p>収入：<span th:text="${sunyuu}"></span>円</p>
+    <p>支出：<span th:text="${shishutsu}"></span>円</p>
+    <p>貯金：<span th:text="${chokin}"></span>円</p>
+  </body>
+</html>
