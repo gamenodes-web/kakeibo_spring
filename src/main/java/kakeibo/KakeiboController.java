@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import java.util.List;
 
 @Controller
 public class KakeiboController {
@@ -17,7 +18,12 @@ public class KakeiboController {
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("list", repository.findAll());
+        List<KakeiboData> list = repository.findAll();
+        int goukei = list.stream()
+            .mapToInt(KakeiboData::getChokin)
+            .sum();
+        model.addAttribute("list", list);
+        model.addAttribute("goukei", goukei);
         return "index";
     }
 
@@ -30,7 +36,12 @@ public class KakeiboController {
         int chokin = sunyuu - shishutsu;
         KakeiboData data = new KakeiboData(sunyuu, shishutsu, chokin);
         repository.save(data);
-        model.addAttribute("list", repository.findAll());
+        List<KakeiboData> list = repository.findAll();
+        int goukei = list.stream()
+            .mapToInt(KakeiboData::getChokin)
+            .sum();
+        model.addAttribute("list", list);
+        model.addAttribute("goukei", goukei);
         return "index";
     }
 }
