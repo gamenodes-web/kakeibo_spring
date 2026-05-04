@@ -27,17 +27,19 @@
     </form>
 
     <h2>履歴</h2>
-    <table>
-      <tr>
-        <th>収入</th>
-        <th>支出</th>
-        <th>貯金</th>
-      </tr>
-      <tr th:each="data : ${list}">
-        <td th:text="${data.sunyuu}"></td>
-        <td th:text="${data.shishutsu}"></td>
-        <td th:text="${data.chokin}"></td>
-      </tr>
-    </table>
+  <table>
+  <tr>
+    <th>日付</th>
+    <th>収入</th>
+    <th>支出</th>
+    <th>貯金</th>
+  </tr>
+  <tr th:each="data : ${list}">
+    <td th:text="${data.date}"></td>
+    <td th:text="${data.sunyuu}"></td>
+    <td th:text="${data.shishutsu}"></td>
+    <td th:text="${data.chokin}"></td>
+  </tr>
+　</table>
   </body>
 </html>
